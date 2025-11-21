@@ -1,0 +1,54 @@
+.chatbot {
+  position: fixed;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: end;
+  width: 20%;
+
+  .hubly-form {
+    width: 100%;
+    background-color: white;
+
+    .status-bar {
+      border-radius: 4px 4px 0 0;
+      background: #33475b;
+      padding: 0.5rem;
+      color: white;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .msg-area {
+      height: 40%;
+      background-color: #eeeeee;
+    }
+  }
+
+  .message {
+    position: relative;
+    background-color: white;
+    padding-inline: 16px;
+    box-shadow: 0 4px 20px rgba(66, 91, 118, 0.15);
+    border-radius: 4px;
+
+    .bot-icon {
+      position: absolute;
+      top: -1rem;
+      left: 50%;
+    }
+
+    .cross {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+    }
+  }
+
+  .hide {
+    display: none;
+  }
+}

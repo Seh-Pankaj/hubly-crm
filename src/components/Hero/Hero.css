@@ -1,0 +1,191 @@
+:root {
+  color: #30404d;
+}
+
+.hero {
+  display: flex;
+  padding-block-start: 3rem;
+  padding-block-end: 10rem;
+
+  .hero-main {
+    padding: 3rem 1rem 1rem 4rem;
+    flex: 1;
+
+    .hero-title {
+      font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+      font-size: 0.8rem;
+      padding-block-end: 1rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 2rem;
+
+      .cta-btn {
+        color: white;
+        background-color: #244779;
+        border-radius: 0.5rem;
+        padding: 0.5rem 1rem;
+      }
+
+      .play-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+    }
+  }
+
+  .hero-images-cont {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding-block-start: 2rem;
+
+    .hero-image {
+      position: relative;
+
+      .notification {
+        background-color: white;
+        position: absolute;
+        top: -40px;
+        right: -80px;
+        display: flex;
+        padding: 1rem;
+        padding-inline-end: 2rem;
+        border-radius: 0.5rem;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+        .notification-text {
+          font-size: 0.8rem;
+
+          & > :first-child {
+            padding-bottom: 0.5rem;
+          }
+
+          .time {
+            color: #9da8b0;
+            font-size: 0.6rem;
+          }
+        }
+      }
+
+      .calendar {
+        position: absolute;
+        bottom: -12rem;
+        left: -9rem;
+      }
+
+      .sales-img {
+        position: absolute;
+        bottom: -4rem;
+        right: -6rem;
+      }
+    }
+  }
+}
+
+.widget--notify {
+  top: -14px;
+  right: -14px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  width: 210px;
+}
+
+.widget__text strong {
+  font-weight: 700;
+}
+.widget__text span {
+  color: var(--primary);
+}
+.widget__muted {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.widget--calendar {
+  left: -26px;
+  bottom: -26px;
+  width: 170px;
+  padding: 12px;
+}
+
+.calendar__header {
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.calendar__grid {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.calendar__day {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  color: var(--muted);
+}
+.calendar__day--active {
+  background: #e6f7ff;
+  color: #085f9a;
+  font-weight: 700;
+}
+.calendar__time {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.widget--sales {
+  right: -18px;
+  bottom: -32px;
+  width: 160px;
+  padding: 12px 14px;
+  text-align: left;
+}
+
+.widget__label {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.widget__amount {
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.widget__spark {
+  height: 8px;
+  background: #eef6f7;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.spark__bar {
+  height: 100%;
+  background: linear-gradient(90deg, #17c37b, #0aa5a9);
+  border-radius: 6px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .hero__container {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+  }
+  .hero__right {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .hero__image-card {
+    width: 100%;
+    min-height: 260px;
+  }
+}

@@ -1,0 +1,29 @@
+.navbar {
+  padding-inline: 4rem;
+  padding-block: 1rem;
+  display: flex;
+  justify-content: space-between;
+
+  .btns-cont {
+    display: flex;
+    align-items: center;
+
+    & > a {
+      text-decoration: none;
+    }
+  }
+
+  .login-btn {
+    margin-right: 1rem;
+    color: #36364a;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+  }
+
+  .signup-btn {
+    color: white;
+    background-color: #244779;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+  }
+}

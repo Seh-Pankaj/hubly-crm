@@ -1,0 +1,36 @@
+.footer-section {
+  display: flex;
+  padding: 2rem;
+  gap: 2rem;
+  position: relative;
+
+  .logo-cont {
+    flex: 1/4;
+    padding-top: 3rem;
+  }
+
+  .footer {
+    flex-grow: 1;
+    place-items: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    a {
+      text-decoration: none;
+      color: #1b1a1a;
+    }
+
+    .col {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  .socials-list {
+    display: flex;
+    gap: 0.5rem;
+    position: absolute;
+    bottom: 4rem;
+    right: 3rem;
+  }
+}

@@ -1,0 +1,6 @@
+.companies {
+  background-color: #ebf1f9;
+  display: flex;
+  justify-content: space-evenly;
+  padding-block: 2rem;
+}

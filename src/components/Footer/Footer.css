@@ -11,7 +11,7 @@
 
   .footer {
     flex-grow: 1;
-    place-items: center;
+    place-content: center;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 
@@ -28,9 +28,8 @@
 
   .socials-list {
     display: flex;
-    gap: 0.5rem;
-    position: absolute;
-    bottom: 4rem;
-    right: 3rem;
+    gap: 1rem;
+    justify-content: start;
+    align-items: end;
   }
 }

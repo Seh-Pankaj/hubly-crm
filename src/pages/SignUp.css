@@ -1,0 +1,52 @@
+.signup-form {
+  .title-cont {
+    display: flex;
+    justify-content: space-between;
+
+    .title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    span {
+      text-decoration: underline;
+      color: #4831d4;
+      width: initial;
+      cursor: pointer;
+    }
+  }
+
+  label {
+    font-size: 12px;
+  }
+
+  input {
+    border: 1px solid rgba(102, 102, 102, 0.35);
+    border-radius: 8px;
+    background-color: inherit;
+    padding: 0.35rem;
+    width: 70%;
+    margin-bottom: 0.8rem;
+  }
+
+  input[type="checkbox"] {
+    accent-color: black;
+    width: initial;
+  }
+
+  span {
+    width: 80%;
+    display: inline-block;
+  }
+
+  .signup-btn {
+    width: 80%;
+    color: white;
+    background-color: rgb(17, 17, 17, 0.25);
+    border-radius: 1.5rem;
+    padding-block: 0.7rem;
+    text-align: center;
+    cursor: not-allowed;
+  }
+}

@@ -1,0 +1,144 @@
+:root {
+  --card-bg: #fff;
+  --muted: #8b95a5;
+  --accent: #0e5b84; /* blue used for Save button in mock */
+  --green: #00d907;
+  --picker-width: 120px;
+  --item-h: 48px;
+  --center-highlight: #eef6f6; /* pale highlight for center row */
+  --card-radius: 20px;
+  --card-padding: 20px;
+}
+
+/* Card container */
+.timer-card {
+  width: 720px;
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+  padding: var(--card-padding);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  font-family: Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: #111827;
+}
+
+/* header */
+.timer-header h3 {
+  margin: 0 0 12px 0;
+  font-size: 1.05rem;
+  color: #111827;
+}
+
+/* image preview (optional) */
+.timer-mock-preview img {
+  width: 100%;
+  max-width: 420px;
+  display: block;
+  margin-bottom: 12px;
+  border-radius: 12px;
+}
+
+/* body layout */
+.timer-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* pickers row */
+.picker-row {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* colon */
+.colon {
+  font-size: 1.5rem;
+  color: var(--muted);
+  width: 18px;
+  text-align: center;
+}
+
+/* one wheel column */
+.picker-column {
+  width: var(--picker-width);
+  height: calc(var(--item-h) * 3); /* show 3 rows, center active */
+  position: relative;
+  outline: none;
+}
+
+/* visible list with scroll snapping */
+.picker-list {
+  height: 100%;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: calc(var(--item-h) * 1) 0; /* top & bottom padding so items can center */
+  box-sizing: content-box;
+}
+
+/* each item */
+.picker-item {
+  height: var(--item-h);
+  line-height: var(--item-h);
+  text-align: center;
+  font-size: 1.05rem;
+  scroll-snap-align: center;
+  user-select: none;
+  cursor: pointer;
+  color: var(--muted);
+  transition:
+    color 120ms ease,
+    font-weight 120ms ease,
+    transform 120ms ease;
+}
+
+/* selected style - when scrolled to center */
+.picker-item.selected {
+  color: #111;
+  font-weight: 600;
+  transform: scale(1.02);
+}
+
+/* persistent center highlight overlay (the pale bar where active item sits) */
+.picker-center {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: var(--item-h);
+  top: calc(50% - var(--item-h) / 2);
+  border-radius: 6px;
+  pointer-events: none;
+  background: var(--center-highlight);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+/* actions */
+.actions-row {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+/* Save button */
+.save-btn {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(14, 91, 132, 0.15);
+}
+
+/* small responsiveness */
+@media (max-width: 800px) {
+  .timer-card {
+    width: 100%;
+  }
+  :root {
+    --picker-width: 90px;
+    --item-h: 40px;
+  }
+}

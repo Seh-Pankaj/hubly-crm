@@ -28,7 +28,7 @@ const Hero = () => {
           <img src="hero-img.png" alt="Team meeting" />
 
           <div className="notification">
-            <img src="jerry.png" width="34px" height="34px" alt="user-icon" />
+            <img src="user-4.png" width="34px" height="34px" alt="user-icon" />
             <div className="notification-text">
               <div>
                 <strong>Jerry Calzoni</strong> joined <span>Swimming</span>

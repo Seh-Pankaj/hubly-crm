@@ -2,8 +2,8 @@ html {
   margin: 0px;
   padding: 0px;
   font-family: "barlow", Tahoma, Geneva, Verdana, sans-serif;
-  width: 100%;
   background-color: #f8fbfe;
+  box-sizing: border-box;
 }
 
 body {

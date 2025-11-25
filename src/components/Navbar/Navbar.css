@@ -8,22 +8,22 @@
     display: flex;
     align-items: center;
 
+    .login-btn {
+      margin-right: 1rem;
+      color: #36364a;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+    }
+
+    .signup-btn {
+      color: white;
+      background-color: #244779;
+      border-radius: 0.5rem;
+      padding: 0.5rem 1rem;
+    }
+
     span {
       cursor: pointer;
     }
-  }
-
-  .login-btn {
-    margin-right: 1rem;
-    color: #36364a;
-    font-weight: 500;
-    padding: 0.5rem 1rem;
-  }
-
-  .signup-btn {
-    color: white;
-    background-color: #244779;
-    border-radius: 0.5rem;
-    padding: 0.5rem 1rem;
   }
 }

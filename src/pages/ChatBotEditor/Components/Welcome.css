@@ -1,0 +1,18 @@
+.message-cont {
+  padding: 0.5rem 3rem 0.5rem 0.25rem;
+  background-color: #f6f7f5;
+  font-size: 12px;
+  position: relative;
+
+  .word-limit {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+  }
+
+  img {
+    position: absolute;
+    top: 2rem;
+    right: 1rem;
+  }
+}

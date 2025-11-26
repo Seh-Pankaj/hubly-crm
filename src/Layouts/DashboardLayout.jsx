@@ -1,36 +1,68 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import "./DashboardLayout.css";
+import { useState } from "react";
+
+const menuList = [
+  {
+    title: "Dashboard",
+    imgSrc: "home.png",
+    alt: "home-icon",
+    url: "dashboard",
+  },
+  {
+    title: "Contact Center",
+    imgSrc: "message.png",
+    alt: "message-icon",
+    url: "tickets",
+  },
+  {
+    title: "Analytics",
+    imgSrc: "analytics.png",
+    alt: "analytics-icon",
+    url: "analytics",
+  },
+  {
+    title: "Chatbot",
+    imgSrc: "bot.png",
+    alt: "chatbot-icon",
+    url: "chatbot",
+  },
+  {
+    title: "Teams",
+    imgSrc: "team.png",
+    alt: "teams-icon",
+    url: "teams",
+  },
+  {
+    title: "Settings",
+    imgSrc: "settings.png",
+    alt: "settings-icon",
+    url: "settings",
+  },
+];
 
 const DashboardLayout = () => {
+  const [selectedMenu, setSelectedMenu] = useState(0);
+  const navigate = useNavigate();
+
+  const navigateToPage = (url, index) => {
+    navigate(url);
+    setSelectedMenu(index);
+  };
+
   return (
     <div className="layout">
       <div className="menu-bar">
         <div className="main-menu">
-          <img src="dash-logo.png" alt="logo" width="75%" />
-          <div>
-            <img src="home.png" alt="home-icon" />
-            <div>Dashboard</div>
-          </div>
-          <div>
-            <img src="message.png" alt="message-icon" />
-            <div>Contact Center</div>
-          </div>
-          <div>
-            <img src="analytics.png" alt="analytics-icon" />
-            <div>Analytics</div>
-          </div>
-          <div>
-            <img src="bot.png" alt="chatbot-icon" />
-            <div>Chatbot</div>
-          </div>
-          <div>
-            <img src="team.png" alt="teams-icon" />
-            <div>Teams</div>
-          </div>
-          <div>
-            <img src="settings.png" alt="settings-icon" />
-            <div>Settings</div>
-          </div>
+          <img src="dash-logo.png" alt="logo" />
+          {menuList.map((menu, index) => (
+            <div key={index} onClick={() => navigateToPage(menu.url, index)}>
+              <img src={menu.imgSrc} alt={menu.alt} />
+              {selectedMenu === index && (
+                <div className="menu-title">{menu.title}</div>
+              )}
+            </div>
+          ))}
         </div>
 
         <div>

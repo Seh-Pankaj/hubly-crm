@@ -28,27 +28,34 @@
       }
 
       .msg-area {
-        height: 15rem;
         background-color: #eeeeee;
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
         justify-content: end;
 
-        padding: 0 1rem 1rem 0.5rem;
+        padding: 0.5rem;
 
-        #hey-text {
-          background: white;
-          flex-grow: 0;
-          margin-inline-end: 1rem;
-          font-size: 0.6rem;
-          padding: 0.8rem 0.7rem;
-          border-radius: 10px;
+        .bot-msg-cont {
+          display: flex;
+          gap: 0.5rem;
+
+          .auto-msg {
+            .msg {
+              background: white;
+              flex-grow: 0;
+              margin-inline-end: 1rem;
+              font-size: 0.6rem;
+              padding: 0.8rem 0.7rem;
+              border-radius: 10px;
+              margin-bottom: 10px;
+            }
+          }
         }
 
         .msg-form {
           display: flex;
-          gap: 0.5rem;
+          justify-content: end;
 
           .form-info {
             border-radius: 10px;

@@ -1,0 +1,122 @@
+.add-team-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+
+  .add-team-modal {
+    background: #ffffff;
+    border-radius: 24px;
+    box-shadow: 0 24px 60px rgba(15, 23, 42, 0.2);
+    padding: 32px 40px 28px 40px;
+    color: #000;
+  }
+
+  .add-team-header {
+    margin-bottom: 24px;
+
+    .add-team-title {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .add-team-subtitle {
+      font-size: 14px;
+      line-height: 1.5;
+      color: #6b7280;
+      max-width: 560px;
+    }
+  }
+
+  .add-team-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .add-team-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    .add-team-label {
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .add-team-input,
+    .add-team-select {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 6px;
+      border: 1px solid #d1d6da;
+      font-size: 14px;
+      outline: none;
+      background: #ffffff;
+    }
+
+    .add-team-input::placeholder {
+      color: #afafaf;
+    }
+
+    .add-team-input:focus,
+    .add-team-select:focus {
+      border-color: #2563eb;
+      background: #ffffff;
+      box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.1);
+    }
+  }
+
+  .add-team-footer {
+    margin-top: 24px;
+    display: flex;
+    justify-content: end;
+    gap: 16px;
+
+    .save-team-btn {
+      display: flex;
+      justify-content: center;
+      min-width: 140px;
+      padding: 10px 20px;
+      border-radius: 24px;
+      border: none;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .cancel-btn {
+      background: #f3f4f6;
+      color: #9ca3af;
+    }
+
+    .cancel-btn:hover {
+      background: #e5e7eb;
+    }
+
+    .save-btn {
+      background: #0f4e8a;
+      color: #ffffff;
+      box-shadow: 0 6px 12px rgba(15, 78, 138, 0.25);
+    }
+
+    .save-btn:hover {
+      background: #0b3a67;
+    }
+  }
+}
+
+/* small screens */
+@media (max-width: 640px) {
+  .add-team-overlay {
+    .add-team-modal {
+      padding: 24px 20px 20px 20px;
+      border-radius: 18px;
+    }
+  }
+}

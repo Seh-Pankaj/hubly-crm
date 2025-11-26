@@ -1,0 +1,136 @@
+.settings-cont {
+  background: #ffffff;
+  height: 100%;
+
+  .settings-heading {
+    padding: 2rem 0 1rem 1rem;
+    color: #6a6b70;
+    font-weight: 500;
+  }
+
+  .profile-tabs {
+    display: flex;
+
+    .profile-tab {
+      padding: 0.5rem 1rem;
+      font-weight: 500;
+      font-size: 14px;
+      color: #184e7f;
+      cursor: pointer;
+      border-bottom: 2px solid #184e7f;
+    }
+  }
+
+  .profile-separator {
+    height: 1px;
+    background: #e5e7eb;
+    margin-right: 2rem;
+  }
+
+  .profile-form {
+    padding: 2rem;
+  }
+
+  .form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .field-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    gap: 2.5rem;
+
+    .field-label {
+      font-size: 0.85rem;
+      color: #374151;
+    }
+
+    .field-input {
+      width: 340px;
+      border-radius: 6px;
+      border: 1px solid #e5e7eb;
+      padding: 0.55rem 0.9rem;
+      font-size: 0.9rem;
+      outline: none;
+      background: #ffffff;
+    }
+
+    .field-input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.08);
+    }
+  }
+
+  .info-holder {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  .info-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .info-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 999px;
+    border: 1px solid #d1d5db;
+    font-size: 11px;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: default;
+    background: #ffffff;
+  }
+
+  .info-tooltip {
+    position: absolute;
+    top: 160%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0.45rem 0.9rem;
+    background: #ffffff;
+    border-radius: 50px;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15);
+    font-size: 0.7rem;
+    color: #6b7280;
+    white-space: nowrap;
+    opacity: 0;
+
+    transition:
+      opacity 0.15s ease,
+      transform 0.15s ease;
+  }
+
+  .info-wrapper:hover .info-tooltip {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
+  .profile-actions {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .profile-save-btn {
+    min-width: 150px;
+    padding: 0.6rem 1.6rem;
+    border-radius: 10px;
+    border: none;
+    background: #0f4e8a;
+    color: #ffffff;
+    font-weight: 500;
+    cursor: pointer;
+
+    text-align: center;
+  }
+}

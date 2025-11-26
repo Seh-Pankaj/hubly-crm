@@ -1,0 +1,124 @@
+.teams-page {
+  background-color: white;
+  min-height: 100vh;
+
+  .teams-heading {
+    padding: 2rem 1rem;
+    color: #6a6b70;
+  }
+
+  .team-cont {
+    padding: 1.5rem;
+    background-color: #ffffff;
+  }
+
+  /* table wrapper */
+  .team-table-cont {
+    background-color: #ffffff;
+    border-radius: 12px;
+  }
+
+  /* table basics */
+  .team-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    color: #111827;
+  }
+
+  /* header cells */
+  .team-table thead tr {
+    border-top: 1px solid #6a6a6a;
+    border-bottom: 1px solid #6a6a6a;
+  }
+
+  .team-table th {
+    text-align: left;
+    padding: 12px 16px;
+    font-weight: 500;
+    color: #2563eb; /* blue-ish header text */
+    font-size: 13px;
+  }
+
+  /* first header with sort icon */
+  .team-th-fullname {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .team-sort-icon {
+    width: 12px;
+    height: 12px;
+  }
+
+  /* body rows */
+  .team-row td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 14px;
+  }
+
+  .team-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  /* actions column */
+  .team-actions-th {
+    width: 80px;
+  }
+
+  .team-actions-cont {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: flex-end;
+    position: relative;
+  }
+
+  .team-icon-btn {
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .team-icon-btn img {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* footer with Add Team members button */
+  .team-footer {
+    margin-top: 12px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .add-team-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border: none;
+    cursor: pointer;
+    background-color: #0f4e8a; /* dark blue like screenshot */
+    color: #ffffff;
+    padding: 8px 18px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .add-team-plus {
+    font-size: 16px;
+    line-height: 1;
+  }
+
+  /* optional: hover styles */
+  .add-team-btn:hover {
+    background-color: #0b3a67;
+  }
+}

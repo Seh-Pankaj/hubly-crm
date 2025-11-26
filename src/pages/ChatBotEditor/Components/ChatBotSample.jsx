@@ -9,19 +9,22 @@ const ChatBotSample = () => {
             <img src="online.png" alt="online-icon" /> <span>Hubly</span>
           </div>
           <div className="msg-area">
-            <div style={{ display: "flex", justifyContent: "end" }}>
-              <div id="hey-text">Hey</div>
-            </div>
-            <div className="msg-form">
+            <div className="bot-msg-cont">
               <div>
                 <img
                   src="chatbot.png"
                   alt="chatbot-icon"
                   width="28px"
                   height="28px"
-                  style={{ marginTop: "0.5rem" }}
                 />
               </div>
+
+              <div className="auto-msg">
+                <div className="msg">How can I help you?</div>
+                <div className="msg">Ask me anything!</div>
+              </div>
+            </div>
+            <div className="msg-form">
               <div className="form-info">
                 <p className="form-heading">Introduce Yourself</p>
                 <div className="actual-form">

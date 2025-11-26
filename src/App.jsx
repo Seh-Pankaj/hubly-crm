@@ -8,6 +8,8 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import ContactCenter from "./pages/ContactCenter/ContactCenter";
 import Analytics from "./pages/Analytics/Analytics";
 import ChatBotEditor from "./pages/ChatBotEditor/ChatBotEditor";
+import TeamManagement from "./pages/TeamManagement/TeamManagement";
+import EditProfile from "./pages/EditProfile/EditProfile";
 
 const App = () => {
   return (
@@ -23,8 +25,8 @@ const App = () => {
           <Route path="/tickets" element={<ContactCenter />} />
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/chatbot" element={<ChatBotEditor />} />
-          <Route path="/teams" element={<Dashboard />} />
-          <Route path="/settings" element={<Dashboard />} />
+          <Route path="/teams" element={<TeamManagement />} />
+          <Route path="/settings" element={<EditProfile />} />
         </Route>
       </Routes>
     </BrowserRouter>

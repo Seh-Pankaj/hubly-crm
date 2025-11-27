@@ -75,7 +75,7 @@ const EditProfile = () => {
                 <div className="info-wrapper">
                   <span className="info-icon">i</span>
                   <div className="info-tooltip">
-                    cannot contain specail characters
+                    cannot contain special characters
                   </div>
                 </div>
               </div>
@@ -100,7 +100,7 @@ const EditProfile = () => {
                 <div className="info-wrapper">
                   <span className="info-icon">i</span>
                   <div className="info-tooltip">
-                    cannot contain specail characters
+                    cannot contain special characters
                   </div>
                 </div>
               </div>

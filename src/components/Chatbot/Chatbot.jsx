@@ -2,6 +2,13 @@ import { useEffect, useState } from "react";
 import "./Chatbot.css";
 
 const Chatbot = () => {
+  const formInitialState = {
+    name: "",
+    email: "",
+    phone: "",
+  };
+
+  const [formValues, setFormValues] = useState(formInitialState);
   const [clicked, setClicked] = useState(false);
 
   useEffect(() => {
@@ -20,6 +27,36 @@ const Chatbot = () => {
   const showForm = () => {
     closeMessage();
     toggleClick();
+  };
+
+  const handleFormChange = (e) => {
+    const key = e.target.name;
+    const value = e.target.value;
+    setFormValues({ ...formValues, [key]: value });
+  };
+
+  const disableThankYouBtn = () => {
+    const tBtn = document.querySelector(".submit-btn");
+    tBtn.style.backgroundColor = "#2166a7af";
+    tBtn.style.cursor = "not-allowed";
+    tBtn.setAttribute("disabled", true);
+  };
+
+  const disableFormInputs = () => {
+    const formInputs = document.querySelectorAll(".form-input");
+    formInputs.forEach((input) => {
+      input.style.color = "#8e8e8e";
+      input.style.cursor = "not-allowed";
+      input.setAttribute("disabled", true);
+    });
+  };
+
+  const submitForm = (e) => {
+    e.preventDefault();
+
+    disableThankYouBtn();
+
+    disableFormInputs();
   };
 
   return (
@@ -47,7 +84,7 @@ const Chatbot = () => {
           <div className="msg-form">
             <div className="form-info">
               <p className="form-heading">Introduce Yourself</p>
-              <div className="actual-form">
+              <form className="actual-form" onSubmit={submitForm}>
                 <div>
                   <label htmlFor="name">Your Name</label>
                   <br />
@@ -56,6 +93,10 @@ const Chatbot = () => {
                     name="name"
                     id="name"
                     placeholder="Your Name"
+                    value={formValues.name}
+                    onChange={(e) => handleFormChange(e)}
+                    required
+                    className="form-input"
                   />
                 </div>
                 <div>
@@ -65,7 +106,12 @@ const Chatbot = () => {
                     type="text"
                     name="phone"
                     id="phone"
-                    placeholder="+1 (000) 000-0000"
+                    autoComplete="true"
+                    placeholder="+91 9898989898"
+                    value={formValues.phone}
+                    onChange={(e) => handleFormChange(e)}
+                    required
+                    className="form-input"
                   />
                 </div>
                 <div>
@@ -76,13 +122,19 @@ const Chatbot = () => {
                     name="email"
                     id="email"
                     placeholder="example@gmail.com"
+                    value={formValues.email}
+                    onChange={(e) => handleFormChange(e)}
+                    required
+                    className="form-input"
                   />
                 </div>
 
                 <div>
-                  <div className="submit-btn">Thank you!</div>
+                  <button type="submit" className="submit-btn">
+                    Thank you!
+                  </button>
                 </div>
-              </div>
+              </form>
             </div>
           </div>
         </div>
@@ -90,9 +142,13 @@ const Chatbot = () => {
           <input
             type="text"
             placeholder="Write a message"
-            className="msg"
+            name="message"
+            id="message"
+            className="cursor"
           ></input>
-          <img src="Send.png" alt="aero-icon" />
+          <button title="Please introduce yourself first">
+            <img src="Send.png" alt="aero-icon" />
+          </button>
         </div>
       </div>
       <div className="message">

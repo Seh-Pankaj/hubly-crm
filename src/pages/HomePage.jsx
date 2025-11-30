@@ -1,11 +1,11 @@
-import About from "../components/About/about";
-import Chatbot from "../components/Chatbot/Chatbot";
-import Companies from "../components/Companies/Companies";
-import Footer from "../components/Footer/Footer";
-import Functions from "../components/Functions/Functions";
-import Hero from "../components/Hero/Hero";
-import Navbar from "../components/Navbar/Navbar";
-import Plans from "../components/Plans/Plans";
+import About from "../components/About/About.jsx";
+import Chatbot from "../components/Chatbot/Chatbot.jsx";
+import Companies from "../components/Companies/Companies.jsx";
+import Footer from "../components/Footer/Footer.jsx";
+import Functions from "../components/Functions/Functions.jsx";
+import Hero from "../components/Hero/Hero.jsx";
+import Navbar from "../components/Navbar/Navbar.jsx";
+import Plans from "../components/Plans/Plans.jsx";
 
 const HomePage = () => {
   return (

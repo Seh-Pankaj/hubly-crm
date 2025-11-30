@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./TeamManagement.css";
-import AddTeamMate from "./AddTeamMate";
-import DeleteConfirmModal from "./DeleteConfirmModal";
+import AddTeamMate from "./AddTeamMate.jsx";
+import DeleteConfirmModal from "./DeleteConfirmModal.jsx";
 
 const teamMembers = [
   {

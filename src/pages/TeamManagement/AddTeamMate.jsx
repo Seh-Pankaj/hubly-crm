@@ -15,6 +15,7 @@ const AddTeamMate = ({ isOpen, onClose, onSave }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    if (name === "phone" && value.length > 10) return;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 

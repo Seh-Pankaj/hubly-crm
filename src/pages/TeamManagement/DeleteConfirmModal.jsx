@@ -1,7 +1,16 @@
+import { apiPost } from "../../api";
 import "./DeleteConfirmModal.css";
 
-const DeleteConfirmModal = ({ open, onClose, onConfirm }) => {
+const DeleteConfirmModal = ({ open, onClose, onConfirm, userId }) => {
   if (!open) return null;
+
+  const deleteUser = async () => {
+    try {
+      await apiPost("/user/delete-user", { userId });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="delete-modal-overlay" onClick={onClose}>
@@ -12,7 +21,13 @@ const DeleteConfirmModal = ({ open, onClose, onConfirm }) => {
           <button className="delete-btn cancel-del" onClick={onClose}>
             Cancel
           </button>
-          <button className="delete-btn confirm-del" onClick={onConfirm}>
+          <button
+            className="delete-btn confirm-del"
+            onClick={() => {
+              deleteUser();
+              onConfirm();
+            }}
+          >
             Confirm
           </button>
         </div>

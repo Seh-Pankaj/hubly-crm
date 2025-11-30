@@ -2,47 +2,29 @@ import { useState } from "react";
 import "./TeamManagement.css";
 import AddTeamMate from "./AddTeamMate.jsx";
 import DeleteConfirmModal from "./DeleteConfirmModal.jsx";
-
-const teamMembers = [
-  {
-    id: 1,
-    name: "Joe Doe",
-    phone: "+1 (000) 000-0000",
-    email: "example@gmail.com",
-    role: "Admin",
-    avatar: "user-1.png",
-  },
-  {
-    id: 2,
-    name: "Joe Doe",
-    phone: "+1 (000) 000-0000",
-    email: "example@gmail.com",
-    role: "Member",
-    avatar: "user-2.png",
-  },
-  {
-    id: 3,
-    name: "Joe Doe",
-    phone: "+1 (000) 000-0000",
-    email: "example@gmail.com",
-    role: "Member",
-    avatar: "user-3.png",
-  },
-  {
-    id: 4,
-    name: "Joe Doe",
-    phone: "+1 (000) 000-0000",
-    email: "example@gmail.com",
-    role: "Member",
-    avatar: "user-4.png",
-  },
-];
+import {} from "react-redux";
+import { useEffect } from "react";
+import { apiGet } from "../../api.js";
 
 const TeamManagement = () => {
+  const [teamMates, setTeamMates] = useState([]);
   const [showAdd, setShowAdd] = useState(false);
 
   const [openDelete, setOpenDelete] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(null);
+
+  useEffect(() => {
+    const getTeamMates = async () => {
+      try {
+        const res = await apiGet("/get-team-mates");
+        setTeamMates(res.users);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getTeamMates();
+  });
 
   const handleDeleteClick = (index) => {
     setOpenDelete(true);
@@ -77,16 +59,16 @@ const TeamManagement = () => {
               </tr>
             </thead>
             <tbody>
-              {teamMembers.map((member, index) => (
-                <tr key={member.id} className="team-row">
+              {teamMates.map((member, index) => (
+                <tr key={member._id} className="team-row">
                   <td>
                     <img
-                      src={member.avatar}
+                      src={`user-${((index + 3) % 5) + 1}.png`}
                       alt={member.name}
                       className="team-avatar"
                     />
                   </td>
-                  <td>{member.name}</td>
+                  <td>{member.firstName + " " + member.lastName}</td>
                   <td>{member.phone}</td>
                   <td>{member.email}</td>
                   <td>{member.role}</td>
@@ -107,6 +89,7 @@ const TeamManagement = () => {
                             open={openDelete}
                             onClose={() => setOpenDelete(false)}
                             onConfirm={confirmDelete}
+                            userId={member._id}
                           />
                         )}
                       </div>
@@ -130,7 +113,7 @@ const TeamManagement = () => {
       <AddTeamMate
         isOpen={showAdd}
         onClose={() => setShowAdd(false)}
-        onSave={(data) => {
+        onSave={() => {
           setShowAdd(false);
         }}
       />

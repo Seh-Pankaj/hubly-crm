@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
 import "./Chatbot.css";
+import { apiGet, apiPost } from "../../api";
+import BotMessage from "./BotMessage";
+import { useRef } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { updateChatbot } from "../../redux/chatbotReducer";
 
 const Chatbot = () => {
   const formInitialState = {
@@ -10,17 +16,38 @@ const Chatbot = () => {
 
   const [formValues, setFormValues] = useState(formInitialState);
   const [clicked, setClicked] = useState(false);
+  const [ticketNumber, setTicketNumber] = useState(null);
+  const [userMessage, setUserMessage] = useState("");
+  const msgRef = useRef();
+
+  const dispatch = useDispatch();
+
+  const chatbot = useSelector((state) => state.chatbot);
 
   useEffect(() => {
     document.querySelector(".hubly-form").classList.toggle("hide");
   }, [clicked]);
+
+  useEffect(() => {
+    const getChatBotSettings = async () => {
+      try {
+        const chbt = await apiGet("/get-chatbot-settings");
+
+        dispatch(updateChatbot(chbt));
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getChatBotSettings();
+  }, []);
 
   const toggleClick = () => {
     setClicked(!clicked);
   };
 
   const closeMessage = () => {
-    const msgEle = document.querySelector(".message");
+    const msgEle = document.querySelector(".chat-bot-message");
     msgEle.classList.add("hide");
   };
 
@@ -32,6 +59,9 @@ const Chatbot = () => {
   const handleFormChange = (e) => {
     const key = e.target.name;
     const value = e.target.value;
+
+    if (key === "phone" && value.length > 10) return;
+
     setFormValues({ ...formValues, [key]: value });
   };
 
@@ -51,36 +81,58 @@ const Chatbot = () => {
     });
   };
 
-  const submitForm = (e) => {
+  const enableMessaging = () => {
+    const msgInput = document.querySelector("#message");
+    msgInput.removeAttribute("disabled");
+    msgInput.classList.remove("cursor");
+    msgInput.removeAttribute("title");
+  };
+
+  const disableMessaging = () => {
+    const msgInput = document.querySelector("#message");
+    msgInput.setAttribute("disabled", true);
+    msgInput.classList.add("cursor");
+  };
+
+  const submitForm = async (e) => {
     e.preventDefault();
 
     disableThankYouBtn();
-
     disableFormInputs();
+    enableMessaging();
+
+    setTicketNumber((await apiPost("/create-ticket", formValues)).ticketId);
+  };
+
+  const sendMessage = async () => {
+    const msgValue = msgRef.current.value;
+    if (!msgValue) return;
+
+    setUserMessage(msgValue);
+    await apiPost("/intro-message", {
+      ticketId: ticketNumber,
+      message: msgValue,
+      sender: "User",
+    });
+
+    msgRef.current.value = "";
+    disableMessaging();
   };
 
   return (
     <div className="chatbot">
       <div className="hubly-form hide">
-        <div className="status-bar">
+        <div
+          className="status-bar"
+          style={{ backgroundColor: `${chatbot.headerColor}` }}
+        >
           <img src="online.png" alt="online-icon" /> <span>Hubly</span>
         </div>
-        <div className="msg-area">
-          <div className="bot-msg-cont">
-            <div>
-              <img
-                src="chatbot.png"
-                alt="chatbot-icon"
-                width="28px"
-                height="28px"
-              />
-            </div>
-
-            <div className="auto-msg">
-              <div className="msg">How can I help you?</div>
-              <div className="msg">Ask me anything!</div>
-            </div>
-          </div>
+        <div
+          className="msg-area"
+          style={{ backgroundColor: `${chatbot.backgroundColor}` }}
+        >
+          <BotMessage messages={[chatbot.introLineOne, chatbot.introLineTwo]} />
           <div className="msg-form">
             <div className="form-info">
               <p className="form-heading">Introduce Yourself</p>
@@ -105,11 +157,14 @@ const Chatbot = () => {
                   <input
                     type="text"
                     name="phone"
+                    pattern="^.{10,}$"
                     id="phone"
-                    autoComplete="true"
                     placeholder="+91 9898989898"
                     value={formValues.phone}
-                    onChange={(e) => handleFormChange(e)}
+                    onChange={(e) => {
+                      e.target.value = e.target.value.replace(/[^0-9]/g, "");
+                      handleFormChange(e);
+                    }}
                     required
                     className="form-input"
                   />
@@ -137,21 +192,41 @@ const Chatbot = () => {
               </form>
             </div>
           </div>
+          {ticketNumber && (
+            <BotMessage
+              messages={[
+                `Your ticked Id is ${ticketNumber}. If you have a query please leave the message below`,
+              ]}
+            />
+          )}
+          {userMessage && (
+            <div className="msg-form">
+              <div className="form-info">{userMessage}</div>
+            </div>
+          )}
+          {userMessage && (
+            <BotMessage
+              messages={["Thank you! Our team will revert back to you soon"]}
+            />
+          )}
         </div>
         <div className="query-cont">
           <input
+            ref={msgRef}
             type="text"
             placeholder="Write a message"
             name="message"
             id="message"
             className="cursor"
+            disabled
+            title="Please introduce yourself first"
           ></input>
-          <button title="Please introduce yourself first">
+          <button onClick={sendMessage} title="Please introduce yourself first">
             <img src="Send.png" alt="aero-icon" />
           </button>
         </div>
       </div>
-      <div className="message">
+      <div className="chat-bot-message">
         <img src="chatbot.png" alt="chatbot-icon" className="bot-icon" />
         <p>
           👋 Want to chat about Hubly? I'm a chatbot here to help you find your

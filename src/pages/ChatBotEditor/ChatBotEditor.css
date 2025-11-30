@@ -9,6 +9,12 @@
     left: 1rem;
   }
 
+  .save-btn {
+    position: fixed;
+    bottom: 1rem;
+    left: 10rem;
+  }
+
   .edit-options {
     display: flex;
     flex: 1.5;

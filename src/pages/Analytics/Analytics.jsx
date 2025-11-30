@@ -1,8 +1,14 @@
+import { useSelector } from "react-redux";
 import "./Analytics.css";
 import MissedChatsChart from "./MissedChatChart";
 import ProgressBar from "./ProgressBar";
 
 const Analytics = () => {
+  const tickets = useSelector((state) => state.tickets);
+  const resolvedChats = tickets.filter(
+    (ticket) => ticket.status == "Resolved"
+  ).length;
+
   return (
     <div className="analytics-cont">
       <div style={{ marginBottom: "1rem", fontWeight: "500" }}>Analytics</div>
@@ -33,7 +39,7 @@ const Analytics = () => {
           </div>
         </div>
         <div className="progress-bar-wrapper">
-          <ProgressBar />
+          <ProgressBar value={resolvedChats / tickets.length} />
         </div>
       </div>
 
@@ -45,7 +51,7 @@ const Analytics = () => {
           This metric Shows the total number of chats for all Channels for the
           selected period
         </div>
-        <div className="total-chats-value">122 Chats</div>
+        <div className="total-chats-value">{tickets.length} Chats</div>
       </div>
     </div>
   );

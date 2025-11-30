@@ -7,10 +7,12 @@
   border: none;
   padding: 0.5rem;
   margin-bottom: 0.5rem;
+  cursor: default;
 }
 
 #edit-icon {
   position: absolute;
   right: 4rem;
   top: 0.5rem;
+  cursor: pointer;
 }

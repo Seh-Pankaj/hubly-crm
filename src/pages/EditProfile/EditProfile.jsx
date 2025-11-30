@@ -1,14 +1,11 @@
 import { useState } from "react";
 import "./EditProfile.css";
+import { useSelector } from "react-redux";
 
 const EditProfile = () => {
-  const [formData, setFormData] = useState({
-    firstName: "Sarthak",
-    lastName: "Pal",
-    email: "Sarthakpal08@gmail.com",
-    password: "************",
-    confirmPassword: "************",
-  });
+  const user = useSelector((state) => state.authReducer.user);
+
+  const [formData, setFormData] = useState(user);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

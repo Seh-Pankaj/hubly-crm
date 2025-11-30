@@ -1,6 +1,9 @@
 .dash-cont {
   padding: 1.5rem;
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+
   box-sizing: border-box;
   background-color: white;
 
@@ -33,13 +36,10 @@
     display: flex;
     gap: 0.5rem;
 
-    div > span {
-      vertical-align: top;
+    div {
+      cursor: pointer;
     }
     .selected-tab {
-      img {
-        margin-right: 0.5rem;
-      }
       border-bottom: 2px solid #184e7f;
     }
   }
@@ -50,8 +50,11 @@
 
   .tickets-cont {
     padding-block: 1rem;
+    overflow-y: auto;
+    flex: 1;
 
     .ticket-block {
+      margin-bottom: 1rem;
       padding: 1rem;
       border: 1.5px solid #e7e7e7;
 

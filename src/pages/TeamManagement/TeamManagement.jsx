@@ -50,7 +50,6 @@ const TeamManagement = () => {
   };
 
   const confirmDelete = () => {
-    console.log("Teammate deleted");
     setOpenDelete(false);
   };
 
@@ -132,7 +131,6 @@ const TeamManagement = () => {
         isOpen={showAdd}
         onClose={() => setShowAdd(false)}
         onSave={(data) => {
-          console.log("new member", data);
           setShowAdd(false);
         }}
       />

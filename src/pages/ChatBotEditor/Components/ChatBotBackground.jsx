@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { updateChatbot } from "../../../redux/chatbotReducer";
 
 const ChatBotBackground = () => {
-  const [bgColor, setBgColor] = useState("#ffffff");
+  const backgroundColor = useSelector((state) => state.chatbot.backgroundColor);
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     let input = e.target.value;
@@ -14,7 +17,7 @@ const ChatBotBackground = () => {
 
     if (input.length > 7) return;
 
-    setBgColor(input);
+    dispatch(updateChatbot({ backgroundColor: input }));
   };
 
   const handleKeyDown = (e, value) => {
@@ -27,16 +30,35 @@ const ChatBotBackground = () => {
     <div className="edit-box">
       <div className="edit-title">Custom Background Color</div>
       <div className="colors-cont">
-        <div className="color"></div>
-        <div className="color"></div>
-        <div className="color"></div>
+        <div
+          style={{ backgroundColor: "#fff" }}
+          onClick={() => dispatch(updateChatbot({ backgroundColor: "#fff" }))}
+          className="color"
+        ></div>
+        <div
+          style={{ backgroundColor: "#9ea7ba" }}
+          onClick={() =>
+            dispatch(updateChatbot({ backgroundColor: "#9ea7ba" }))
+          }
+          className="color"
+        ></div>
+        <div
+          style={{ backgroundColor: "#76829d" }}
+          onClick={() =>
+            dispatch(updateChatbot({ backgroundColor: "#76829d" }))
+          }
+          className="color"
+        ></div>
       </div>
       <div className="custom-color-cont">
-        <div className="custom-display"></div>
+        <div
+          style={{ backgroundColor: backgroundColor }}
+          className="custom-display"
+        ></div>
         <input
           type="text"
           className="custom-color-text"
-          value={bgColor}
+          value={backgroundColor}
           onChange={handleChange}
           onKeyDown={handleKeyDown}
         />

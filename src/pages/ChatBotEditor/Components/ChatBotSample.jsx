@@ -1,14 +1,22 @@
 import "./ChatBotSample.css";
+import { useSelector } from "react-redux";
 
 const ChatBotSample = () => {
+  const chatbot = useSelector((state) => state.chatbot);
   return (
     <div className="bot-sample-cont">
       <div className="chatbota">
         <div className="hubly-form">
-          <div className="status-bar">
+          <div
+            className="status-bar"
+            style={{ backgroundColor: `${chatbot.headerColor}` }}
+          >
             <img src="online.png" alt="online-icon" /> <span>Hubly</span>
           </div>
-          <div className="msg-area">
+          <div
+            className="msg-area"
+            style={{ backgroundColor: `${chatbot.backgroundColor}` }}
+          >
             <div className="bot-msg-cont">
               <div>
                 <img
@@ -20,8 +28,8 @@ const ChatBotSample = () => {
               </div>
 
               <div className="auto-msg">
-                <div className="msg">How can I help you?</div>
-                <div className="msg">Ask me anything!</div>
+                <div className="msg">{chatbot.introLineOne}</div>
+                <div className="msg">{chatbot.introLineTwo}</div>
               </div>
             </div>
             <div className="msg-form">
@@ -78,10 +86,7 @@ const ChatBotSample = () => {
       </div>
       <div className="bot-message">
         <img src="chatbot.png" alt="chatbot-icon" className="bot-icon" />
-        <p className="bot-intro-para">
-          👋 Want to chat about Hubly? I'm a chatbot here to help you find your
-          way.
-        </p>
+        <p className="bot-intro-para">{chatbot.welcomeMessage}</p>
         <img src="Close.png" alt="cross" className="cross" />
       </div>
     </div>

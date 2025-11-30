@@ -1,9 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import introductionFormReducer from "./introductionFormReducer.js";
+import authReducer from "./authReducer.js";
+import ticketReducer from "./ticketsReducer.js";
+import chatbotReducer from "./chatbotReducer.js";
 
 const store = configureStore({
   reducer: {
-    introductionForm: introductionFormReducer,
+    authReducer: authReducer,
+    tickets: ticketReducer,
+    chatbot: chatbotReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

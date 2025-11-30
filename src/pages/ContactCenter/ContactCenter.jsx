@@ -1,40 +1,110 @@
+import { useEffect } from "react";
 import "./ContactCenter.css";
+import { useState } from "react";
+import { apiGet, apiPost } from "../../api";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { saveTickets } from "../../redux/ticketsReducer";
+import formatDate from "../../components/formatDate";
+import { useRef } from "react";
 
 const ContactCenter = () => {
-  const chats = [
-    {
-      img: "user-1.png",
-      heading: "Chat 1",
-      query: "I have a question",
+  const initialTicketState = {
+    ticketId: "",
+    customerDetails: {
+      name: "",
+      email: "",
+      phone: "",
     },
-    {
-      img: "user-2.png",
-      heading: "Chat 2",
-      query: "Ask me anything",
-    },
-  ];
+    status: "",
+    messages: [
+      {
+        message: "",
+        sender: "",
+      },
+    ],
+  };
 
-  const teamMates = [
-    {
-      name: "Rohan",
-      userImage: "user-1.png",
-    },
-    {
-      name: "Mohan",
-      userImage: "user-2.png",
-    },
-    {
-      name: "Rohan",
-      userImage: "user-3.png",
-    },
-    {
-      name: "Rohan",
-      userImage: "user-4.png",
-    },
-  ];
+  const [teamMates, setTeamMates] = useState([]);
+  const teamMsgRef = useRef();
+
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.authReducer.user);
+  const tickets = useSelector((state) => state.tickets);
+
+  const [selectedTicket, setSelectedTicket] = useState(initialTicketState);
+  const [transferId, setTransferId] = useState(null);
+
+  useEffect(() => {
+    const getTickets = async () => {
+      try {
+        const res = await apiPost("/get-tickets", { userId: user.userId });
+        dispatch(saveTickets(res.tickets));
+        setSelectedTicket(res.tickets[0]);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    const getTeamMates = async () => {
+      try {
+        const res = await apiGet("/get-team-mates");
+        setTeamMates(res.users);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getTickets();
+    getTeamMates();
+  }, []);
 
   const assignProperly = (selector) => {
     document.querySelector(selector).classList.toggle("hide");
+  };
+
+  const sendTeamMessage = async () => {
+    const message = teamMsgRef.current.value;
+    if (!message) return;
+
+    try {
+      const updatedTicket = await apiPost("/send-team-message", {
+        message,
+        ticketId: selectedTicket.ticketId,
+        sender: "Agent",
+      });
+
+      setSelectedTicket(updatedTicket);
+    } catch (error) {
+      console.log(error);
+    }
+
+    teamMsgRef.current.value = "";
+  };
+
+  const resolveTicket = async () => {
+    try {
+      const ticket = await apiPost("/resolve-ticket", {
+        ticketId: selectedTicket.ticketId,
+      });
+      setSelectedTicket(ticket);
+      assignProperly(".modal-resolve");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const transferChat = async () => {
+    try {
+      const ticket = await apiPost("/transfer-ticket", {
+        userId: transferId,
+        ticketId: selectedTicket.ticketId,
+      });
+      setSelectedTicket(ticket);
+      assignProperly(".modal-assign");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -48,48 +118,97 @@ const ContactCenter = () => {
           <span>Chats</span>
         </div>
         <div className="chats-cont">
-          {chats.map((chat, index) => (
-            <div key={index} className="chat-det-img">
-              <img src={chat.img} alt="user-icon" />
+          {tickets.map((ticket, index) => (
+            <div
+              key={index}
+              className={`chat-det-img ${ticket.ticketId == selectedTicket.ticketId ? "selected-chat" : ""}`}
+              onClick={() => setSelectedTicket(ticket)}
+            >
+              <img src="user-1.png" alt="user-icon" />
               <div style={{ marginLeft: "8px", lineHeight: "1.2" }}>
-                <div className="chat-head">{chat.heading}</div>
-                <div className="chat-query">{chat.query}</div>
+                <div className="chat-head">{ticket.ticketId}</div>
+                <div className="chat-query">{ticket.messages[0].message}</div>
               </div>
             </div>
           ))}
         </div>
       </div>
-      <div className="main-cont">
-        <div className="main-cont-head">
-          <div>Ticket# 2025-00123</div>
-          <img src="home.png" alt="home-icon" />
-        </div>
+      {selectedTicket.status == "Unresolved" ? (
+        selectedTicket.userId == user.userId ? (
+          <div className="main-cont">
+            <div className="main-cont-head">
+              <div>{selectedTicket.ticketId}</div>
+              <img src="home.png" alt="home-icon" />
+            </div>
 
-        <div className="separator"></div>
+            <div className="separator"></div>
 
-        <div className="main-msg">
-          <div className="date-divider">
-            <div className="date-divider-line"></div>
-            <div>March 7, 2025</div>
-            <div className="date-divider-line"></div>
-          </div>
-          <div className="chat-det-img">
-            <img src={chats[0].img} alt="user-icon" />
-            <div style={{ marginLeft: "8px", lineHeight: "1.1" }}>
-              <div className="chat-head">{chats[0].heading}</div>
-              <div className="chat-query">{chats[0].query}</div>
+            <div className="main-msg">
+              <div className="date-divider">
+                <div className="date-divider-line"></div>
+                <div>{formatDate(selectedTicket.createdAt)}</div>
+                <div className="date-divider-line"></div>
+              </div>
+              <div className="user-det-img">
+                <img src={`user-1.png`} alt="user-icon" />
+                <div style={{ marginLeft: "8px", lineHeight: "1.1" }}>
+                  <div className="chat-head">
+                    {selectedTicket.customerDetails.name}
+                  </div>
+                  <div className="chat-query">
+                    {selectedTicket.messages[0].message}
+                  </div>
+                </div>
+              </div>
+              {selectedTicket.messages.length > 1 ? (
+                <div className="agent-det-img">
+                  <div className="agent-dets">
+                    <div className="chat-head">
+                      {user.firstName + " " + user.lastName}
+                    </div>
+                    {selectedTicket.messages.map((msg, index) => {
+                      if (index != 0) {
+                        return (
+                          <div key={index} className="chat-query">
+                            {msg.message}
+                          </div>
+                        );
+                      }
+                    })}
+                  </div>
+                  <div>
+                    <img src={`user-3.png`} alt="user-icon" />
+                  </div>
+                </div>
+              ) : (
+                <div></div>
+              )}
+            </div>
+            <div className="enter-msg">
+              <textarea
+                ref={teamMsgRef}
+                name="send-message"
+                id="send-message"
+                placeholder="type here"
+              ></textarea>
+              <img
+                src="send-msg.png"
+                onClick={sendTeamMessage}
+                alt="send-icon"
+                id="send-icon"
+              />
             </div>
           </div>
+        ) : (
+          <div style={{ display: "flex", alignItems: "end", padding: "1rem" }}>
+            This chat has been assigned to a different team member.
+          </div>
+        )
+      ) : (
+        <div style={{ display: "flex", alignItems: "end", padding: "1rem" }}>
+          This chat has been resolved
         </div>
-        <div className="enter-msg">
-          <textarea
-            name="send-message"
-            id="send-message"
-            placeholder="type here"
-          ></textarea>
-          <img src="send-msg.png" alt="send-icon" id="send-icon" />
-        </div>
-      </div>
+      )}
       <div className="details-cont">
         <div className="icon-title-cont">
           <img src="user-1.png" alt="user-icon" />
@@ -99,15 +218,21 @@ const ContactCenter = () => {
           <div className="title">Details</div>
           <div className="icon-cont">
             <img src="name-icon.png" alt="name-icon" className="icon" />
-            <div className="disabled-input">John Doe</div>
+            <div className="disabled-input">
+              {selectedTicket.customerDetails.name}
+            </div>
           </div>
           <div className="icon-cont">
             <img src="call-icon.png" alt="call-icon" className="icon" />
-            <div className="disabled-input">+91 9998887776</div>
+            <div className="disabled-input">
+              +91 {selectedTicket.customerDetails.phone}
+            </div>
           </div>
           <div className="icon-cont">
             <img src="mail-icon.png" alt="mail-icon" className="icon" />
-            <div className="disabled-input">example@gmail.com</div>
+            <div className="disabled-input">
+              {selectedTicket.customerDetails.email}
+            </div>
           </div>
         </div>
         <div className="team-mates">
@@ -118,15 +243,21 @@ const ContactCenter = () => {
           >
             <img src="user-3.png" alt="user-icon" className="user-icon" />
             <img src="drop.png" alt="dropdown-icon" className="drop-down" />
-            <div className="disabled-input">John doe</div>
+            <div className="disabled-input">
+              {user.firstName + " " + user.lastName}
+            </div>
           </div>
           <div className="team-cont hide" id="show-teams">
-            {teamMates.map((teamMate) => (
+            {teamMates.map((teamMate, index) => (
               <div
-                key={teamMate.userImage}
-                onClick={() => assignProperly(".modal-assign")}
+                key={index}
+                onClick={() => {
+                  setTransferId(teamMate._id);
+                  assignProperly(".modal-assign");
+                }}
               >
-                <img src={teamMate.userImage} alt="usr-icon" /> {teamMate.name}
+                <img src={`user-${(index + 3) % 5}.png`} alt="usr-icon" />{" "}
+                {teamMate.firstName + " " + teamMate.lastName}
               </div>
             ))}
           </div>
@@ -153,7 +284,9 @@ const ContactCenter = () => {
               >
                 Cancel
               </span>
-              <span className="confirm-btn">Confirm</span>
+              <span onClick={() => transferChat()} className="confirm-btn">
+                Confirm
+              </span>
             </div>
           </div>
         </div>
@@ -167,7 +300,9 @@ const ContactCenter = () => {
               >
                 Cancel
               </span>
-              <span className="confirm-btn">Confirm</span>
+              <span onClick={resolveTicket} className="confirm-btn">
+                Confirm
+              </span>
             </div>
           </div>
         </div>

@@ -29,8 +29,8 @@
       flex-direction: column;
       gap: 0.5rem;
       height: 15rem;
-      justify-content: end;
-      overflow-y: scroll;
+      overflow-y: auto;
+      scrollbar-width: thin;
 
       padding: 0.5rem;
 
@@ -120,7 +120,7 @@
     }
   }
 
-  .message {
+  .chat-bot-message {
     position: relative;
     background-color: white;
     padding-inline: 16px;

@@ -28,7 +28,7 @@
       .chat-det-img {
         margin-block-end: 1rem;
         padding: 0.5rem;
-        background-color: #efefef;
+
         border-radius: 24px;
         display: flex;
 
@@ -42,6 +42,10 @@
           color: #9a9b9d;
           font-size: 12px;
         }
+      }
+
+      .selected-chat {
+        background-color: #efefef;
       }
     }
   }
@@ -86,22 +90,47 @@
           background-color: rgb(200, 200, 200, 0.5);
         }
       }
-    }
 
-    .chat-det-img {
-      margin-block-end: 1rem;
-      padding: 0.5rem;
-      display: flex;
+      .user-det-img {
+        margin-block-end: 1rem;
+        padding: 0.5rem;
+        display: flex;
 
-      .chat-head {
-        color: #5e9bd5;
-        font-size: 14px;
-        font-weight: 500;
+        .chat-head {
+          color: #5e9bd5;
+          font-size: 14px;
+          font-weight: 500;
+        }
+
+        .chat-query {
+          color: #9a9b9d;
+          font-size: 12px;
+        }
       }
 
-      .chat-query {
-        color: #9a9b9d;
-        font-size: 12px;
+      .agent-det-img {
+        margin-block-end: 1rem;
+        padding: 0.5rem;
+        border-radius: 24px;
+        display: flex;
+        justify-content: end;
+
+        .agent-dets {
+          display: flex;
+          flex-direction: column;
+
+          .chat-head {
+            color: #5e9bd5;
+            font-size: 14px;
+            font-weight: 500;
+          }
+
+          .chat-query {
+            color: #9a9b9d;
+            font-size: 12px;
+            text-align: end;
+          }
+        }
       }
     }
 

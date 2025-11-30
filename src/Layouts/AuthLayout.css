@@ -1,5 +1,6 @@
 .auth-page {
   display: flex;
+  min-height: 100vh;
   background-color: #eff0ec;
 
   .auth-main {
@@ -19,6 +20,7 @@
     .text {
       position: absolute;
       bottom: 2rem;
+      width: 80%;
     }
   }
 

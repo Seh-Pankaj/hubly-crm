@@ -1,8 +1,8 @@
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-const ProgressBar = () => {
-  const percentage = 80;
+const ProgressBar = ({ value }) => {
+  const percentage = Math.floor(value * 100);
 
   return (
     <div style={{ flexShrink: "0", width: "80px", height: "80px" }}>

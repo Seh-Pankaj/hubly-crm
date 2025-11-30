@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useDispatch } from "react-redux";
 import "./ChatBotHeader.css";
+import { useSelector } from "react-redux";
+import { updateChatbot } from "../../../redux/chatbotReducer";
 
 const ChatBotHeader = () => {
-  const [headerColor, setHeaderColor] = useState("#ffffff");
+  const headerColor = useSelector((state) => state.chatbot.headerColor);
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     let input = e.target.value;
@@ -14,8 +17,7 @@ const ChatBotHeader = () => {
     input = "#" + input.slice(1).replace(/[^0-9A-Fa-f]/g, "");
 
     if (input.length > 7) return;
-
-    setHeaderColor(input);
+    dispatch(updateChatbot({ headerColor: input }));
   };
 
   const handleKeyDown = (e) => {
@@ -31,9 +33,20 @@ const ChatBotHeader = () => {
     <div className="edit-box">
       <div className="edit-title">Header Color</div>
       <div className="colors-cont">
-        <div className="color"></div>
-        <div className="color"></div>
-        <div className="color"></div>
+        <div
+          className="color"
+          onClick={() => dispatch(updateChatbot({ headerColor: "#000" }))}
+        ></div>
+        <div
+          className="color"
+          style={{ backgroundColor: "#092d7b" }}
+          onClick={() => dispatch(updateChatbot({ headerColor: "#092d7b" }))}
+        ></div>
+        <div
+          className="color"
+          style={{ backgroundColor: "#026b98" }}
+          onClick={() => dispatch(updateChatbot({ headerColor: "#026b98" }))}
+        ></div>
       </div>
       <div className="custom-color-cont">
         <div

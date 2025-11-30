@@ -19,7 +19,7 @@
 
       .status-bar {
         border-radius: 4px 4px 0 0;
-        background: #33475b;
+
         padding: 0.5rem;
         color: white;
         display: flex;
@@ -42,8 +42,9 @@
 
           .auto-msg {
             .msg {
+              text-overflow: ellipsis;
               background: white;
-              flex-grow: 0;
+              width: inherit;
               margin-inline-end: 1rem;
               font-size: 0.6rem;
               padding: 0.8rem 0.7rem;

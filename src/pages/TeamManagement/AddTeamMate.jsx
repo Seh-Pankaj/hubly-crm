@@ -90,7 +90,7 @@ const AddTeamMate = ({ isOpen, onClose, onSave }) => {
           </div>
           <div className="add-team-field">
             <label htmlFor="phone" className="add-team-label">
-              User name
+              Phone Number
             </label>
             <input
               id="phone"
@@ -102,7 +102,7 @@ const AddTeamMate = ({ isOpen, onClose, onSave }) => {
               value={formData.phone}
               onChange={(e) => {
                 e.target.value = e.target.value.replace(/[^0-9]/g, "");
-                handleChange();
+                handleChange(e);
               }}
             />
           </div>

@@ -15,7 +15,7 @@ const Chatbot = () => {
   };
 
   const [formValues, setFormValues] = useState(formInitialState);
-  const [clicked, setClicked] = useState(false);
+  const [clicked, setClicked] = useState(true);
   const [ticketNumber, setTicketNumber] = useState(null);
   const [userMessage, setUserMessage] = useState("");
   const msgRef = useRef();

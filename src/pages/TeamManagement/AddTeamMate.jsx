@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./addTeamMate.css";
+import "./AddTeamMate.css";
 
 const AddTeamMate = ({ isOpen, onClose, onSave }) => {
   const [formData, setFormData] = useState({

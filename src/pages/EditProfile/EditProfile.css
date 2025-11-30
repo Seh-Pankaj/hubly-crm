@@ -122,15 +122,14 @@
   }
 
   .profile-save-btn {
-    min-width: 150px;
-    padding: 0.6rem 1.6rem;
+    padding: 0.6rem 2rem;
     border-radius: 10px;
     border: none;
     background: #0f4e8a;
     color: #ffffff;
     font-weight: 500;
     cursor: pointer;
-
     text-align: center;
+    margin-right: 0.5rem;
   }
 }

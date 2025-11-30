@@ -1,15 +1,22 @@
 import { useState } from "react";
 import "./EditProfile.css";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const EditProfile = () => {
   const user = useSelector((state) => state.authReducer.user);
 
   const [formData, setFormData] = useState(user);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    navigate("/login");
   };
 
   const handleSubmit = (e) => {
@@ -132,6 +139,13 @@ const EditProfile = () => {
           <div className="profile-actions">
             <button type="submit" className="profile-save-btn">
               Save
+            </button>
+            <button
+              className="profile-save-btn"
+              style={{ backgroundColor: "red" }}
+              onClick={handleLogout}
+            >
+              Log out
             </button>
           </div>
         </form>

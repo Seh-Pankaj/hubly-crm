@@ -12,8 +12,8 @@ import TeamManagement from "./pages/TeamManagement/TeamManagement";
 import EditProfile from "./pages/EditProfile/EditProfile";
 import { Provider } from "react-redux";
 import store from "./redux/store";
-import "./redux/persistAuth";
 import RequireAuth from "./Layouts/requireAuth";
+import Unauthorised from "./pages/Unauthorised";
 
 const App = () => {
   return (
@@ -25,16 +25,21 @@ const App = () => {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/login" element={<Login />} />
           </Route>
-          <Route element={<RequireAuth />}>
+          <Route element={<RequireAuth allowedRoles={["Admin", "Member"]} />}>
             <Route element={<DashboardLayout />}>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/tickets" element={<ContactCenter />} />
               <Route path="/analytics" element={<Analytics />} />
               <Route path="/chatbot" element={<ChatBotEditor />} />
-              <Route path="/teams" element={<TeamManagement />} />
               <Route path="/settings" element={<EditProfile />} />
             </Route>
           </Route>
+          <Route element={<RequireAuth allowedRoles={["Admin"]} />}>
+            <Route element={<DashboardLayout />}>
+              <Route path="/teams" element={<TeamManagement />} />
+            </Route>
+          </Route>
+          <Route path="/unauthorised" element={<Unauthorised />} />
         </Routes>
       </BrowserRouter>
     </Provider>

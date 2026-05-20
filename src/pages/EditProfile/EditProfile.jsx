@@ -2,9 +2,11 @@ import { useState } from "react";
 import "./EditProfile.css";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import useLogout from "../../hooks/useLogout";
 
 const EditProfile = () => {
-  const user = useSelector((state) => state.authReducer.user);
+  const user = useSelector((state) => state.auth.user);
+  const { logout } = useLogout();
 
   const [formData, setFormData] = useState(user);
   const navigate = useNavigate();
@@ -15,8 +17,8 @@ const EditProfile = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("user");
-    navigate("/login");
+    logout();
+    navigate("/login", { replace: true });
   };
 
   const handleSubmit = (e) => {

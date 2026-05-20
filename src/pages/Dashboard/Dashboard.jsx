@@ -6,7 +6,6 @@ import { useSelector } from "react-redux";
 import returnTime from "../../components/returnTime";
 import { useDispatch } from "react-redux";
 import { saveTickets } from "../../redux/ticketsReducer";
-import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
   const [searchTickets, setSearchTickets] = useState([]);
@@ -17,9 +16,8 @@ const Dashboard = () => {
   const dispatch = useDispatch();
 
   const [searchTerm, setSearchTerm] = useState("");
-  const navigate = useNavigate();
 
-  const userId = useSelector((state) => state.authReducer.user.userId);
+  const userId = useSelector((state) => state.auth.user._id);
   const tickets = useSelector((state) => state.tickets);
 
   useEffect(() => {

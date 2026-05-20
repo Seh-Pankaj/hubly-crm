@@ -1,15 +1,14 @@
-import { removeLogin } from "../redux/authReducer";
-import useAuthContext from "./useAuthContext";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "../redux/authSlice";
 
-export const useLogout = () => {
-  const { dispatch } = useAuthContext();
+const useLogout = () => {
+  const dispatch = useDispatch();
 
   const logout = () => {
-    // remove data from local storage
-    localStorage.removeItem("jwToken");
-
-    dispatch(removeLogin());
+    dispatch(logoutUser());
   };
 
   return { logout };
 };
+
+export default useLogout;

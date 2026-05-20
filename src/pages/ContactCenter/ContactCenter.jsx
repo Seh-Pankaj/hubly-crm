@@ -29,7 +29,7 @@ const ContactCenter = () => {
   const teamMsgRef = useRef();
 
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.authReducer.user);
+  const user = useSelector((state) => state.auth.user);
   const tickets = useSelector((state) => state.tickets);
 
   const [selectedTicket, setSelectedTicket] = useState(initialTicketState);
@@ -38,7 +38,7 @@ const ContactCenter = () => {
   useEffect(() => {
     const getTickets = async () => {
       try {
-        const res = await apiPost("/get-tickets", { userId: user.userId });
+        const res = await apiPost("/get-tickets", { userId: user._id });
         dispatch(saveTickets(res.tickets));
         setSelectedTicket(res.tickets[0]);
       } catch (error) {
@@ -134,7 +134,7 @@ const ContactCenter = () => {
         </div>
       </div>
       {selectedTicket.status == "Unresolved" ? (
-        selectedTicket.userId == user.userId ? (
+        selectedTicket.userId == user._id ? (
           <div className="main-cont">
             <div className="main-cont-head">
               <div>{selectedTicket.ticketId}</div>
